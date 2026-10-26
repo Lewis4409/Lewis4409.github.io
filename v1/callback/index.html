@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tesla OAuth Callback</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
+    code { word-break: break-all; background: #f4f4f4; padding: 0.2em 0.4em; }
+  </style>
+</head>
+<body>
+  <h1>Tesla 授权回调</h1>
+  <p>如果浏览器停在这一页，请把地址栏完整 URL 发给 Grok Bot「特斯拉」。</p>
+  <p id="out">正在读取参数…</p>
+  <script>
+    const p = new URLSearchParams(location.search);
+    const code = p.get('code');
+    const state = p.get('state');
+    const err = p.get('error');
+    const el = document.getElementById('out');
+    if (err) {
+      el.textContent = '授权失败: ' + err + (p.get('error_description') ? ' — ' + p.get('error_description') : '');
+    } else if (code) {
+      el.innerHTML = '已拿到授权码。<br>code=<code>' + code + '</code><br>state=<code>' + (state || '') + '</code>';
+    } else {
+      el.textContent = '未检测到 code 参数。';
+    }
+  </script>
+</body>
+</html>
