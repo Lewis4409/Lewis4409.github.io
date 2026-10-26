@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tesla OAuth Callback</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+    code { word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>Tesla OAuth Callback</h1>
+  <p>若授权成功，下方会显示 code（请复制给助手，勿发到公开地方）。</p>
+  <p><strong>code:</strong> <code id="code">(none)</code></p>
+  <p><strong>state:</strong> <code id="state">(none)</code></p>
+  <p><strong>error:</strong> <code id="error">(none)</code></p>
+  <script>
+    const q = new URLSearchParams(location.search);
+    document.getElementById('code').textContent = q.get('code') || '(none)';
+    document.getElementById('state').textContent = q.get('state') || '(none)';
+    document.getElementById('error').textContent = q.get('error') || q.get('error_description') || '(none)';
+  </script>
+</body>
+</html>
